@@ -14,6 +14,12 @@ public class PlayerMove : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+
+    void Update() {
+        float mouseX = Input.GetAxis("Mouse X");
+        rotationY += (mouseX * rotationSpeed);
+        transform.rotation = Quaternion.Euler(0,rotationY,0);
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -24,13 +30,6 @@ public class PlayerMove : MonoBehaviour
         Vector3 rightMovement = horizontalInput * transform.right;
         Vector3 direction = (forwardMovement + rightMovement);
         direction.Normalize();
-
-        float mouseX = Input.GetAxis("Mouse X");
-
         rb.AddForce(direction* speedValue);
-        rotationY += (mouseX * rotationSpeed);
-        transform.rotation = Quaternion.Euler(0,rotationY,0);
-
-
     }
 }
